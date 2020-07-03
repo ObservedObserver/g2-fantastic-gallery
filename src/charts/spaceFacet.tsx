@@ -9,10 +9,10 @@ import {
   PURE_GREEN_SCHEME,
 } from "../constrants";
 import { registerCoordinate } from "@antv/coord";
-import { Fake3DCoord, Fake3DCoordWithAngle } from "../coord/fake3d";
+import { Fake3DCoord } from "../coord/fake3d";
 import { Record } from "../interfaces";
 
-registerCoordinate("fakeCube", Fake3DCoordWithAngle(Math.PI / 4));
+registerCoordinate("fakeCube", Fake3DCoord);
 // const COLOR_SCHEME = RANBOW_CAT_SCHEME;
 // const COLOR_SCHEME = GREEN_SCHEME;
 const COLOR_SCHEME = PURE_GREEN_SCHEME;
@@ -88,7 +88,8 @@ const SpaceFacet: React.FC = (props) => {
                 fill: LCOLOR_LIST[facetIndex % LCOLOR_LIST.length],
                 fillOpacity: 0.96,
               });
-            view.coord("fakeCube");
+            // @ts-ignore
+            view.coord("fakeCube", { theta: Math.PI / 4 });
             view.tooltip(false);
           }
       }
