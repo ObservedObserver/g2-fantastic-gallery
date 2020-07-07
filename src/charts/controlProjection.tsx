@@ -53,6 +53,12 @@ const FakeCube: React.FC<LineChart> = (props) => {
         padding: [10, 10],
       });
       view.data(data);
+      // view.scale({
+      //   [measure]: {
+      //     min: 0,
+      //     max: 2000
+      //   }
+      // })
       view
         .line()
         .position(`${dimension}*${measure}`)
@@ -82,21 +88,24 @@ const FakeCube: React.FC<LineChart> = (props) => {
       // @ts-ignore
       view.coord("fakeCube", { theta: (viewIndex / LayerNum) * Math.PI * 2 });
       view.tooltip(false);
+      view.animate(false);
       return view;
     }
     if (container.current) {
       const vis = new Chart({
         container: container.current,
-        autoFit: true,
+        // autoFit: true,
         height: 600,
+        width: 1000,
         padding: [100, 100],
       });
       
-      vis.scale({
-          [measure]: {
-              min: 0
-          }
-      })
+      // vis.scale({
+      //     [measure]: {
+      //         min: 0,
+      //         max: 300000
+      //     }
+      // })
       const LayerNum = 32;
       const data = seriesData;
       const mid = Math.floor(LayerNum / 2)
@@ -108,6 +117,7 @@ const FakeCube: React.FC<LineChart> = (props) => {
         const view = createSingleView(vis, data, i, LayerNum, true);
         viewRefs.current.push(view);
       }
+      vis.animate(false);
       vis.render();
       chart.current = vis;
     }
