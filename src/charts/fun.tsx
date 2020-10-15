@@ -5,9 +5,9 @@ import G2, { Chart } from "@antv/g2";
 import dataSource from "../data/energy.json";
 import { RANBOW_CAT_SCHEME, GREEN_SCHEME, LIGHT_SCHEME } from '../constrants';
 
-// const COLOR_SCHEME = RANBOW_CAT_SCHEME;
+const COLOR_SCHEME = RANBOW_CAT_SCHEME;
 // const COLOR_SCHEME = GREEN_SCHEME;
-const COLOR_SCHEME = LIGHT_SCHEME;
+// const COLOR_SCHEME = LIGHT_SCHEME;
 
 const Radar: React.FC = (props) => {
   const container = useRef<HTMLDivElement>(null);
@@ -29,7 +29,7 @@ const Radar: React.FC = (props) => {
         type: "diagram.sankey",
       });
 
-      // vis.legend(false);
+      vis.legend(false);
       vis.tooltip({
         showTitle: false,
         showMarkers: false,
@@ -63,7 +63,7 @@ const Radar: React.FC = (props) => {
         .color("name", COLOR_SCHEME)
         .tooltip(false)
         .style({
-          fillOpacity: 0.9,
+          // fillOpacity: 0.9,
           strokeOpacity: 0,
           shadowColor: 'rgba(0, 0, 0, 0.29)',
           shadowBlur: 12,

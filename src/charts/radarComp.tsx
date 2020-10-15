@@ -83,6 +83,7 @@ const Radar: React.FC = props => {
         if (container.current) {
             const dataSource1 = mockData(0, colorPool1.length);
             const dataSource2 = mockData(2, colorPool2.length);
+            const dataSource3 = mockBarData(0, 2);
             const vis = new Chart({
               container: container.current,
               autoFit: true,
@@ -90,10 +91,10 @@ const Radar: React.FC = props => {
             });
             const view1 = vis.createView({
               region: {
-                start: { x: 0, y: 0 },
-                end: { x: 1, y: 1 },
+                start: { x: 0, y: 0 }, // 指定该视图绘制的起始位置，x y 为 [0 - 1] 范围的数据
+                end: { x: 1, y: 1 }, // 指定该视图绘制的结束位置，x y 为 [0 - 1] 范围的数据
               },
-              padding: [20, 40],
+              padding: [20, 40], // 指定视图的留白
             });
 
             view1.data(dataSource1)
@@ -107,16 +108,19 @@ const Radar: React.FC = props => {
               .color("color", colorPool1)
               .shape("smooth")
               .style({opacity: 0.82})
-            view1.coord('polar')
+            view1.coord('polar', {
+                innerRadius: 0.2,
+                radius: 0.6
+            })
             view1.axis(false);
             view1.legend(false);
 
             const view2 = vis.createView({
               region: {
-                start: { x: 0, y: 0 },
-                end: { x: 1, y: 1 },
+                start: { x: 0, y: 0 }, // 指定该视图绘制的起始位置，x y 为 [0 - 1] 范围的数据
+                end: { x: 1, y: 1 }, // 指定该视图绘制的结束位置，x y 为 [0 - 1] 范围的数据
               },
-              padding: [20, 40],
+              padding: [20, 40], // 指定视图的留白
             });
 
             view2.data(dataSource2);
@@ -130,8 +134,36 @@ const Radar: React.FC = props => {
               .color("color", colorPool2)
               .shape("smooth")
               .style({opacity: 0.4});
-            view2.coord("polar");
+            view2.coord("polar", {
+                innerRadius: 0.2,
+                radius: 0.8
+            });
             view2.legend(false);
+
+            const view3 = vis.createView({
+              region: {
+                start: { x: 0, y: 0 }, // 指定该视图绘制的起始位置，x y 为 [0 - 1] 范围的数据
+                end: { x: 1, y: 1 }, // 指定该视图绘制的结束位置，x y 为 [0 - 1] 范围的数据
+              },
+              padding: [20, 40], // 指定视图的留白
+            });
+
+            view3.data(dataSource3);
+            view3
+              .interval()
+              .position("theta*r")
+              .adjust({
+                type: "stack",
+              })
+              .color("color", [
+                colorPool1[Math.round(2 * colorPool1.length / 7)],
+                colorPool2[Math.round(4 * colorPool1.length / 7)],
+              ]);
+            view3.coord("polar", {
+              innerRadius: 0.8,
+            });
+            view3.axis(false);
+            view3.legend(false);
 
             vis.legend(false);
             vis.render();
