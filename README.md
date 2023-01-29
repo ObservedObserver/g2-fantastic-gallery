@@ -1,7 +1,6 @@
-# G2 Demo
+# G2 Cool Viz Demo
 
-+ [《不正经可视化系列：用G2绘制酷炫的上流可视化》](https://zhuanlan.zhihu.com/p/157485461)
-+ [语雀专栏：不正经可视化](https://www.yuque.com/chenhao-sv93h/ickwgd)
+make some interesting visualization with antv/g2.
 
 ![](./imgs/demo1-1.png)
 
